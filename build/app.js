@@ -5698,9 +5698,9 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052603d8060106000396000f36504044633f3de50606060405260e060020a600035046396e4ee3d81146024575b6007565b6024356004350260408051918252519081900360200190f3",
     "events": {},
-    "updated_at": 1480186147401,
+    "updated_at": 1480197828210,
     "links": {},
-    "address": "0xdfc627083bf939bebfcf795251929a45801de613"
+    "address": "0xe6373b1d9967c0ab8d810d6a1dc757474ac150c0"
   }
 };
 
@@ -6308,11 +6308,11 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480186147398,
+    "updated_at": 1480197828213,
     "links": {
-      "ConvertLib": "0xdfc627083bf939bebfcf795251929a45801de613"
+      "ConvertLib": "0xe6373b1d9967c0ab8d810d6a1dc757474ac150c0"
     },
-    "address": "0xe67b060e43f87f961d2d8ac9abf0fc9ee63f55ab"
+    "address": "0x83fde7d179dc1af690f63c2ab290200f76719a16"
   }
 };
 
@@ -6852,8 +6852,8 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a0319909116179055610138806100376000396000f3606060405260e060020a60003504630900f010811461003f578063445df0ac146100b85780638da5cb5b146100c6578063fdacd576146100dd575b610002565b34610002576101086004356000805433600160a060020a03908116911614156100b45781905080600160a060020a031663fdacd5766001600050546040518260e060020a02815260040180828152602001915050600060405180830381600087803b156100025760325a03f115610002575050505b5050565b346100025761010a60015481565b346100025761011c600054600160a060020a031681565b346100025761010860043560005433600160a060020a03908116911614156101055760018190555b50565b005b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f3",
     "events": {},
-    "updated_at": 1480186147403,
-    "address": "0xa12480e0d0c4e92e090481ffb08298a6bc342a29",
+    "updated_at": 1480197828218,
+    "address": "0x5040382780193ca3624c7be8261298e49f0c087e",
     "links": {}
   }
 };
@@ -7349,6 +7349,19 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "function"
       },
       {
+        "constant": false,
+        "inputs": [],
+        "name": "getWattHours",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
         "constant": true,
         "inputs": [],
         "name": "duration",
@@ -7358,6 +7371,27 @@ var SolidityEvent = require("web3/lib/web3/event.js");
             "type": "uint256"
           }
         ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "startTime",
+            "type": "uint256"
+          },
+          {
+            "name": "wattHours",
+            "type": "uint256"
+          },
+          {
+            "name": "duration",
+            "type": "uint256"
+          }
+        ],
+        "name": "setOrder",
+        "outputs": [],
         "payable": false,
         "type": "function"
       },
@@ -7420,6 +7454,32 @@ var SolidityEvent = require("web3/lib/web3/event.js");
       {
         "constant": false,
         "inputs": [],
+        "name": "getDuration",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "getStartTime",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
         "name": "getSeller",
         "outputs": [
           {
@@ -7431,30 +7491,15 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "function"
       },
       {
-        "inputs": [
-          {
-            "name": "seller",
-            "type": "address"
-          },
-          {
-            "name": "startTime",
-            "type": "uint256"
-          },
-          {
-            "name": "wattHours",
-            "type": "uint256"
-          },
-          {
-            "name": "duration",
-            "type": "uint256"
-          }
-        ],
+        "inputs": [],
         "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x606060405260405160808061017d8339505060e0604052610159806100246000396000f3606060405236156100565760e060020a600035046308551a53811461005b5780630fb5a6b41461007257806335cea28814610080578063476982c9146100cd57806378e97925146100db578063dbd0e1b6146100e9575b610002565b34610002576100fb600054600160a060020a031681565b346100025761011760035481565b3461000257610129600435600480548290811015610002579060005260206000209060040201600050805460018201546002830154600390930154600160a060020a039092169350919084565b346100025761011760025481565b346100025761011760015481565b3461000257600054600160a060020a03165b60408051600160a060020a039092168252519081900360200190f35b60408051918252519081900360200190f35b60408051600160a060020a0390951685526020850193909352838301919091526060830152519081900360800190f3",
+    "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a03199091161790556063600155606460025560656003556101c3806100466000396000f3606060405236156100825760e060020a600035046308551a5381146100875780630d75be1e1461009e5780630fb5a6b4146100ad57806327070657146100bb57806335cea288146100c3578063476982c91461011057806378e979251461011e578063ad2e8c9b1461012c578063c828371e1461013c578063dbd0e1b61461014c575b610002565b3461000257610165600054600160a060020a031681565b34610002576101816002545b90565b346100025761018160035481565b34610002575b005b3461000257610193600435600480548290811015610002579060005260206000209060040201600050805460018201546002830154600390930154600160a060020a039092169350919084565b346100025761018160025481565b346100025761018160015481565b34610002576101816003546100aa565b34610002576101816001546100aa565b3461000257610165600054600160a060020a03166100aa565b60408051600160a060020a039092168252519081900360200190f35b60408051918252519081900360200190f35b60408051600160a060020a0390951685526020850193909352838301919091526060830152519081900360800190f3",
     "events": {},
-    "updated_at": 1480193146107
+    "updated_at": 1480197986125,
+    "links": {},
+    "address": "0x3272327476f68bfb8148c0f2d247c284f376b48c"
   }
 };
 
@@ -44586,8 +44631,8 @@ module.exports = transfer;
 },{"crypto":58}],224:[function(require,module,exports){
 module.exports = {
   "ConvertLib": require("/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js"),
-  "MetaCoin": require("/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js"),
   "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
+  "MetaCoin": require("/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js"),
   "SellOrder": require("/Users/bgeils/workspace/truffle/build/contracts/SellOrder.sol.js"),
 };
 },{"/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js":1,"/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js":2,"/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js":3,"/Users/bgeils/workspace/truffle/build/contracts/SellOrder.sol.js":4}]},{},[224])(224)
@@ -44623,7 +44668,7 @@ window.addEventListener('load', function() {
 
                                                                 
 
-  [ConvertLib,MetaCoin,Migrations,SellOrder].forEach(function(contract) {         
+  [ConvertLib,MetaCoin,SellOrder,Migrations].forEach(function(contract) {         
 
     contract.setProvider(window.web3.currentProvider);          
 
@@ -44661,7 +44706,33 @@ function refreshBalance() {
   });
 };
 
-function refreshUser(){
+function getSellOrderDetails(address){
+
+  var sell = SellOrder.at(address);
+
+  sell.getSeller.call({from: account}).then(function(value) {
+    console.log("Seller addr:"+ value);
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getStartTime.call({from: account}).then(function(value) {
+    console.log("Start Time:"+ value)
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getWattHours.call({from: account}).then(function(value) {
+    console.log("Watt Hours:"+ value)
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getDuration.call({from: account}).then(function(value) {
+    console.log("Duration:"+ value)
+  }).catch(function(e) {
+    console.log(e);
+  });
 
 };
 
@@ -44684,6 +44755,7 @@ function sendCoin() {
 
 window.onload = function() {
   if (window.location.href.match('surge.html') != null) {
+
     web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
         alert("There was an error fetching your accounts.");
@@ -44703,7 +44775,7 @@ window.onload = function() {
       console.log("account:"+ account)
 
       refreshBalance();
-      refreshUser();
+      
     });
   } else if(window.location.href.match('index.html') != null){
 
@@ -44728,6 +44800,20 @@ window.onload = function() {
     });
 
   }
+}
+
+function createSellOrder(){
+   SellOrder.new({from: account, gas: 1550000}).then(function(instance) {
+    // `instance` is a new instance of the abstraction.
+    // If this callback is called, the deployment was successful.
+    console.log("New Sell Order Addr:"+ instance.address);
+    getSellOrderDetails(instance.address);
+    return null;
+  }).catch(function(e) {
+    // There was an error! Handle it.
+    console.log(e);
+  });
+
 }
 
 

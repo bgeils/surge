@@ -24,7 +24,33 @@ function refreshBalance() {
   });
 };
 
-function refreshUser(){
+function getSellOrderDetails(address){
+
+  var sell = SellOrder.at(address);
+
+  sell.getSeller.call({from: account}).then(function(value) {
+    console.log("Seller addr:"+ value);
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getStartTime.call({from: account}).then(function(value) {
+    console.log("Start Time:"+ value)
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getWattHours.call({from: account}).then(function(value) {
+    console.log("Watt Hours:"+ value)
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getDuration.call({from: account}).then(function(value) {
+    console.log("Duration:"+ value)
+  }).catch(function(e) {
+    console.log(e);
+  });
 
 };
 
@@ -47,6 +73,7 @@ function sendCoin() {
 
 window.onload = function() {
   if (window.location.href.match('surge.html') != null) {
+
     web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
         alert("There was an error fetching your accounts.");
@@ -66,7 +93,7 @@ window.onload = function() {
       console.log("account:"+ account)
 
       refreshBalance();
-      refreshUser();
+      
     });
   } else if(window.location.href.match('index.html') != null){
 
@@ -91,4 +118,18 @@ window.onload = function() {
     });
 
   }
+}
+
+function createSellOrder(){
+   SellOrder.new({from: account, gas: 1550000}).then(function(instance) {
+    // `instance` is a new instance of the abstraction.
+    // If this callback is called, the deployment was successful.
+    console.log("New Sell Order Addr:"+ instance.address);
+    getSellOrderDetails(instance.address);
+    return null;
+  }).catch(function(e) {
+    // There was an error! Handle it.
+    console.log(e);
+  });
+
 }

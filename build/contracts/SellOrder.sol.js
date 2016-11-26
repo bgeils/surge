@@ -231,13 +231,13 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.new = function() {
     if (this.currentProvider == null) {
-      throw new Error("Migrations error: Please call setProvider() first before calling new().");
+      throw new Error("SellOrder error: Please call setProvider() first before calling new().");
     }
 
     var args = Array.prototype.slice.call(arguments);
 
     if (!this.unlinked_binary) {
-      throw new Error("Migrations error: contract binary not set. Can't deploy new instance.");
+      throw new Error("SellOrder error: contract binary not set. Can't deploy new instance.");
     }
 
     var regex = /__[^_]+_+/g;
@@ -256,7 +256,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         return name != arr[index + 1];
       }).join(", ");
 
-      throw new Error("Migrations contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of Migrations: " + unlinked_libraries);
+      throw new Error("SellOrder contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of SellOrder: " + unlinked_libraries);
     }
 
     var self = this;
@@ -297,7 +297,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.at = function(address) {
     if (address == null || typeof address != "string" || address.length != 42) {
-      throw new Error("Invalid address passed to Migrations.at(): " + address);
+      throw new Error("Invalid address passed to SellOrder.at(): " + address);
     }
 
     var contract_class = this.web3.eth.contract(this.abi);
@@ -308,7 +308,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.deployed = function() {
     if (!this.address) {
-      throw new Error("Cannot find deployed address: Migrations not deployed or address not set.");
+      throw new Error("Cannot find deployed address: SellOrder not deployed or address not set.");
     }
 
     return this.at(this.address);
@@ -350,22 +350,22 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   "default": {
     "abi": [
       {
-        "constant": false,
-        "inputs": [
+        "constant": true,
+        "inputs": [],
+        "name": "seller",
+        "outputs": [
           {
-            "name": "new_address",
+            "name": "",
             "type": "address"
           }
         ],
-        "name": "upgrade",
-        "outputs": [],
         "payable": false,
         "type": "function"
       },
       {
-        "constant": true,
+        "constant": false,
         "inputs": [],
-        "name": "last_completed_migration",
+        "name": "getWattHours",
         "outputs": [
           {
             "name": "",
@@ -378,11 +378,11 @@ var SolidityEvent = require("web3/lib/web3/event.js");
       {
         "constant": true,
         "inputs": [],
-        "name": "owner",
+        "name": "duration",
         "outputs": [
           {
             "name": "",
-            "type": "address"
+            "type": "uint256"
           }
         ],
         "payable": false,
@@ -392,12 +392,115 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "constant": false,
         "inputs": [
           {
-            "name": "completed",
+            "name": "startTime",
+            "type": "uint256"
+          },
+          {
+            "name": "wattHours",
+            "type": "uint256"
+          },
+          {
+            "name": "duration",
             "type": "uint256"
           }
         ],
-        "name": "setCompleted",
+        "name": "setOrder",
         "outputs": [],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "buyOrders",
+        "outputs": [
+          {
+            "name": "buyer",
+            "type": "address"
+          },
+          {
+            "name": "buyWattHours",
+            "type": "uint256"
+          },
+          {
+            "name": "buyStartTime",
+            "type": "uint256"
+          },
+          {
+            "name": "duration",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "wattHours",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "startTime",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "getDuration",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "getStartTime",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "getSeller",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
         "payable": false,
         "type": "function"
       },
@@ -406,11 +509,11 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a0319909116179055610138806100376000396000f3606060405260e060020a60003504630900f010811461003f578063445df0ac146100b85780638da5cb5b146100c6578063fdacd576146100dd575b610002565b34610002576101086004356000805433600160a060020a03908116911614156100b45781905080600160a060020a031663fdacd5766001600050546040518260e060020a02815260040180828152602001915050600060405180830381600087803b156100025760325a03f115610002575050505b5050565b346100025761010a60015481565b346100025761011c600054600160a060020a031681565b346100025761010860043560005433600160a060020a03908116911614156101055760018190555b50565b005b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f3",
+    "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a03199091161790556063600155606460025560656003556101c3806100466000396000f3606060405236156100825760e060020a600035046308551a5381146100875780630d75be1e1461009e5780630fb5a6b4146100ad57806327070657146100bb57806335cea288146100c3578063476982c91461011057806378e979251461011e578063ad2e8c9b1461012c578063c828371e1461013c578063dbd0e1b61461014c575b610002565b3461000257610165600054600160a060020a031681565b34610002576101816002545b90565b346100025761018160035481565b34610002575b005b3461000257610193600435600480548290811015610002579060005260206000209060040201600050805460018201546002830154600390930154600160a060020a039092169350919084565b346100025761018160025481565b346100025761018160015481565b34610002576101816003546100aa565b34610002576101816001546100aa565b3461000257610165600054600160a060020a03166100aa565b60408051600160a060020a039092168252519081900360200190f35b60408051918252519081900360200190f35b60408051600160a060020a0390951685526020850193909352838301919091526060830152519081900360800190f3",
     "events": {},
-    "updated_at": 1480197828218,
-    "address": "0x5040382780193ca3624c7be8261298e49f0c087e",
-    "links": {}
+    "updated_at": 1480197986125,
+    "links": {},
+    "address": "0x3272327476f68bfb8148c0f2d247c284f376b48c"
   }
 };
 
@@ -495,7 +598,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     Contract.links[name] = address;
   };
 
-  Contract.contract_name   = Contract.prototype.contract_name   = "Migrations";
+  Contract.contract_name   = Contract.prototype.contract_name   = "SellOrder";
   Contract.generated_with  = Contract.prototype.generated_with  = "3.2.0";
 
   // Allow people to opt-in to breaking changes now.
@@ -535,6 +638,6 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   } else {
     // There will only be one version of this contract in the browser,
     // and we can use that.
-    window.Migrations = Contract;
+    window.SellOrder = Contract;
   }
 })();
