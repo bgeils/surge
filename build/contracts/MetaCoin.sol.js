@@ -457,13 +457,30 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         ],
         "name": "Transfer",
         "type": "event"
+      },
+      "0x134e340554ff8a7d64280a2a28b982df554e2595e5bf45cd39368f31099172a6": {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_value",
+            "type": "uint256"
+          }
+        ],
+        "name": "Balance",
+        "type": "event"
       }
     },
-    "updated_at": 1480174763126,
+    "updated_at": 1480186147398,
     "links": {
-      "ConvertLib": "0x4225d9097cffa415c015e9da4dc41b8ec99c5862"
+      "ConvertLib": "0xdfc627083bf939bebfcf795251929a45801de613"
     },
-    "address": "0xe96f0f737f40acb58ff04f09a4227feb7d61e970"
+    "address": "0xe67b060e43f87f961d2d8ac9abf0fc9ee63f55ab"
   }
 };
 

@@ -1,11 +1,7 @@
 var accounts;
 var account;
 
-function login(){
-  var loginAddress = document.getElementById("user_addresss").value;
-  account = loginAddress;
-  window.location.href='/surge.html';
-}
+// Used in surge.html
 
 function setStatus(message) {
   var status = document.getElementById("status");
@@ -18,6 +14,10 @@ function refreshBalance() {
   meta.getBalance.call(account, {from: account}).then(function(value) {
     var balance_element = document.getElementById("balance");
     balance_element.innerHTML = value.valueOf();
+
+    var address_element = document.getElementById("address");
+    address_element.innerHTML = account;
+
   }).catch(function(e) {
     console.log(e);
     setStatus("Error getting balance; see log.");
@@ -56,10 +56,34 @@ window.onload = function() {
 
       accounts = accs;
       //account = accounts[0];
-
+      account = getJsonFromUrl()['uname']
+      
       console.log(accounts);
+      console.log("account:"+ account)
 
       refreshBalance();
     });
+  } else if(window.location.href.match('index.html') != null){
+
+    web3.eth.getAccounts(function(err, accs) {
+      if (err != null) {
+        alert("There was an error fetching your accounts.");
+        return;
+      }
+
+      if (accs.length == 0) {
+        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
+        return;
+      }
+
+      accounts = accs;
+      
+      var ex1 = document.getElementById("ex1");
+      var ex2 = document.getElementById("ex2");
+      ex1.innerHTML = accounts[0];
+      ex2.innerHTML = accounts[1];
+
+    });
+
   }
 }

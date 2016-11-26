@@ -5698,9 +5698,9 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052603d8060106000396000f36504044633f3de50606060405260e060020a600035046396e4ee3d81146024575b6007565b6024356004350260408051918252519081900360200190f3",
     "events": {},
-    "updated_at": 1480174763121,
+    "updated_at": 1480186147401,
     "links": {},
-    "address": "0x4225d9097cffa415c015e9da4dc41b8ec99c5862"
+    "address": "0xdfc627083bf939bebfcf795251929a45801de613"
   }
 };
 
@@ -6289,13 +6289,30 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         ],
         "name": "Transfer",
         "type": "event"
+      },
+      "0x134e340554ff8a7d64280a2a28b982df554e2595e5bf45cd39368f31099172a6": {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_value",
+            "type": "uint256"
+          }
+        ],
+        "name": "Balance",
+        "type": "event"
       }
     },
-    "updated_at": 1480174763126,
+    "updated_at": 1480186147398,
     "links": {
-      "ConvertLib": "0x4225d9097cffa415c015e9da4dc41b8ec99c5862"
+      "ConvertLib": "0xdfc627083bf939bebfcf795251929a45801de613"
     },
-    "address": "0xe96f0f737f40acb58ff04f09a4227feb7d61e970"
+    "address": "0xe67b060e43f87f961d2d8ac9abf0fc9ee63f55ab"
   }
 };
 
@@ -6835,8 +6852,8 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a0319909116179055610138806100376000396000f3606060405260e060020a60003504630900f010811461003f578063445df0ac146100b85780638da5cb5b146100c6578063fdacd576146100dd575b610002565b34610002576101086004356000805433600160a060020a03908116911614156100b45781905080600160a060020a031663fdacd5766001600050546040518260e060020a02815260040180828152602001915050600060405180830381600087803b156100025760325a03f115610002575050505b5050565b346100025761010a60015481565b346100025761011c600054600160a060020a031681565b346100025761010860043560005433600160a060020a03908116911614156101055760018190555b50565b005b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f3",
     "events": {},
-    "updated_at": 1480174763123,
-    "address": "0xb0365b372ecaa33c981655186e698bed17a07d3b",
+    "updated_at": 1480186147403,
+    "address": "0xa12480e0d0c4e92e090481ffb08298a6bc342a29",
     "links": {}
   }
 };
@@ -44020,11 +44037,7 @@ window.addEventListener('load', function() {
 var accounts;
 var account;
 
-function login(){
-  var loginAddress = document.getElementById("user_addresss").value;
-  account = loginAddress;
-  window.location.href='/surge.html';
-}
+// Used in surge.html
 
 function setStatus(message) {
   var status = document.getElementById("status");
@@ -44037,6 +44050,10 @@ function refreshBalance() {
   meta.getBalance.call(account, {from: account}).then(function(value) {
     var balance_element = document.getElementById("balance");
     balance_element.innerHTML = value.valueOf();
+
+    var address_element = document.getElementById("address");
+    address_element.innerHTML = account;
+
   }).catch(function(e) {
     console.log(e);
     setStatus("Error getting balance; see log.");
@@ -44075,10 +44092,77 @@ window.onload = function() {
 
       accounts = accs;
       //account = accounts[0];
-
+      account = getJsonFromUrl()['uname']
+      
       console.log(accounts);
+      console.log("account:"+ account)
 
       refreshBalance();
     });
+  } else if(window.location.href.match('index.html') != null){
+
+    web3.eth.getAccounts(function(err, accs) {
+      if (err != null) {
+        alert("There was an error fetching your accounts.");
+        return;
+      }
+
+      if (accs.length == 0) {
+        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
+        return;
+      }
+
+      accounts = accs;
+      
+      var ex1 = document.getElementById("ex1");
+      var ex2 = document.getElementById("ex2");
+      ex1.innerHTML = accounts[0];
+      ex2.innerHTML = accounts[1];
+
+    });
+
   }
 }
+
+
+// Used in index.html
+function login(){
+  var loginAddress = document.getElementById("user_addresss").value;
+  account = loginAddress;
+  post('/surge.html', {uname: account}, "get");
+}
+
+function getJsonFromUrl() {
+  var query = location.search.substr(1);
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
