@@ -24,6 +24,10 @@ function refreshBalance() {
   });
 };
 
+function refreshUser(){
+
+};
+
 function sendCoin() {
   var meta = MetaCoin.deployed();
 
@@ -62,6 +66,7 @@ window.onload = function() {
       console.log("account:"+ account)
 
       refreshBalance();
+      refreshUser();
     });
   } else if(window.location.href.match('index.html') != null){
 
