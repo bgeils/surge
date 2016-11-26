@@ -43969,8 +43969,8 @@ module.exports = transfer;
 },{"crypto":57}],223:[function(require,module,exports){
 module.exports = {
   "ConvertLib": require("/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js"),
-  "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
   "MetaCoin": require("/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js"),
+  "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
 };
 },{"/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js":1,"/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js":2,"/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js":3}]},{},[223])(223)
 });
@@ -44020,6 +44020,12 @@ window.addEventListener('load', function() {
 var accounts;
 var account;
 
+function login(){
+  var loginAddress = document.getElementById("user_addresss").value;
+  account = loginAddress;
+  window.location.href='/surge.html';
+}
+
 function setStatus(message) {
   var status = document.getElementById("status");
   status.innerHTML = message;
@@ -44055,20 +44061,24 @@ function sendCoin() {
 };
 
 window.onload = function() {
-  web3.eth.getAccounts(function(err, accs) {
-    if (err != null) {
-      alert("There was an error fetching your accounts.");
-      return;
-    }
+  if (window.location.href.match('surge.html') != null) {
+    web3.eth.getAccounts(function(err, accs) {
+      if (err != null) {
+        alert("There was an error fetching your accounts.");
+        return;
+      }
 
-    if (accs.length == 0) {
-      alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
-      return;
-    }
+      if (accs.length == 0) {
+        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
+        return;
+      }
 
-    accounts = accs;
-    account = accounts[0];
+      accounts = accs;
+      //account = accounts[0];
 
-    refreshBalance();
-  });
+      console.log(accounts);
+
+      refreshBalance();
+    });
+  }
 }
