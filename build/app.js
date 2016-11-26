@@ -44631,8 +44631,8 @@ module.exports = transfer;
 },{"crypto":58}],224:[function(require,module,exports){
 module.exports = {
   "ConvertLib": require("/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js"),
-  "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
   "MetaCoin": require("/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js"),
+  "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
   "SellOrder": require("/Users/bgeils/workspace/truffle/build/contracts/SellOrder.sol.js"),
 };
 },{"/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js":1,"/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js":2,"/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js":3,"/Users/bgeils/workspace/truffle/build/contracts/SellOrder.sol.js":4}]},{},[224])(224)
@@ -44668,7 +44668,7 @@ window.addEventListener('load', function() {
 
                                                                 
 
-  [ConvertLib,MetaCoin,SellOrder,Migrations].forEach(function(contract) {         
+  [MetaCoin,ConvertLib,Migrations,SellOrder].forEach(function(contract) {         
 
     contract.setProvider(window.web3.currentProvider);          
 
@@ -44711,25 +44711,25 @@ function getSellOrderDetails(address){
   var sell = SellOrder.at(address);
 
   sell.getSeller.call({from: account}).then(function(value) {
-    console.log("Seller addr:"+ value);
+    console.log("Seller addr: "+ value);
   }).catch(function(e) {
     console.log(e);
   });
 
   sell.getStartTime.call({from: account}).then(function(value) {
-    console.log("Start Time:"+ value)
+    console.log("Start Time: "+ value)
   }).catch(function(e) {
     console.log(e);
   });
 
   sell.getWattHours.call({from: account}).then(function(value) {
-    console.log("Watt Hours:"+ value)
+    console.log("Watt Hours: "+ value)
   }).catch(function(e) {
     console.log(e);
   });
 
   sell.getDuration.call({from: account}).then(function(value) {
-    console.log("Duration:"+ value)
+    console.log("Duration: "+ value)
   }).catch(function(e) {
     console.log(e);
   });
@@ -44799,22 +44799,25 @@ window.onload = function() {
 
     });
 
+  } else if(window.location.href.match('sell-order.html') != null){
+    var params = getJsonFromUrl();
+    
+    account = getJsonFromUrl()['uname']
+
+    createSellOrder(params['wh'], params['d']);
+    htmlSellOrder();
   }
 }
 
-function createSellOrder(){
-   SellOrder.new({from: account, gas: 1550000}).then(function(instance) {
-    // `instance` is a new instance of the abstraction.
-    // If this callback is called, the deployment was successful.
-    console.log("New Sell Order Addr:"+ instance.address);
-    getSellOrderDetails(instance.address);
-    return null;
-  }).catch(function(e) {
-    // There was an error! Handle it.
-    console.log(e);
-  });
-
+function gotoSellOrder(){
+  var startTime = document.getElementById("startTime").value;
+  var wattHours = document.getElementById("wattHours").value;
+  var duration = document.getElementById("duration").value;
+  post('/sell-order.html', {stime: startTime, wh: wattHours, d: duration, uname: account}, "get");
 }
+
+
+
 
 
 // Used in index.html
@@ -44858,3 +44861,49 @@ function post(path, params, method) {
     form.submit();
 }
 
+
+
+function createSellOrder(wh, d){
+   SellOrder.new({from: account, gas: 1550000}).then(function(instance) {
+    // `instance` is a new instance of the abstraction.
+    // If this callback is called, the deployment was successful.
+    console.log("New Sell Order Addr:"+ instance.address);
+    //getSellOrderDetails(instance.address);
+    return null;
+  }).catch(function(e) {
+    // There was an error! Handle it.
+  });
+}
+
+function htmlSellOrder(){
+	var params =getJsonFromUrl();
+
+	var stime = document.getElementById("stime");
+	var wh = document.getElementById("wh");
+	var d = document.getElementById("d");
+
+	// console.log(stime)
+	// var cstime = stime.valueAsNumber;
+	// console.log(cstime)
+	// console.log(new Date(stime.valueAsNumber))
+
+	stime.innerHTML = params['stime'];
+	wh.innerHTML = params['wh'];
+	d.innerHTML = params['d'];
+}
+
+function backHome(){
+	var params =getJsonFromUrl();
+	post('/surge.html', {uname: params['uname']}, "get");
+}
+
+function toggle_visibility(id){
+	this.__toggle = !this.__toggle;
+    var target = document.getElementById(id);
+    if( this.__toggle) {
+        target.style.height = target.scrollHeight+"px";
+    }
+    else {
+        target.style.height = 0;
+    }
+}
