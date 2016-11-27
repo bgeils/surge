@@ -5698,9 +5698,9 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052603d8060106000396000f36504044633f3de50606060405260e060020a600035046396e4ee3d81146024575b6007565b6024356004350260408051918252519081900360200190f3",
     "events": {},
-    "updated_at": 1480227034690,
+    "updated_at": 1480231984177,
     "links": {},
-    "address": "0x1ddd671081046bcfd9cdc69e72cc2c0ffe03262a"
+    "address": "0x80f7e42f1e8fff3b858f802f1fe69ac6d21f2ed9"
   }
 };
 
@@ -6360,11 +6360,11 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480227034697,
+    "updated_at": 1480231984184,
     "links": {
-      "ConvertLib": "0x1ddd671081046bcfd9cdc69e72cc2c0ffe03262a"
+      "ConvertLib": "0x80f7e42f1e8fff3b858f802f1fe69ac6d21f2ed9"
     },
-    "address": "0x0bc356f8bdd04a5cc8d28ccf1bfe9a83cf5b1ad9"
+    "address": "0xb3c008821440b6e4213c107e3d9b6af7a6138a39"
   }
 };
 
@@ -6904,8 +6904,8 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a0319909116179055610138806100376000396000f3606060405260e060020a60003504630900f010811461003f578063445df0ac146100b85780638da5cb5b146100c6578063fdacd576146100dd575b610002565b34610002576101086004356000805433600160a060020a03908116911614156100b45781905080600160a060020a031663fdacd5766001600050546040518260e060020a02815260040180828152602001915050600060405180830381600087803b156100025760325a03f115610002575050505b5050565b346100025761010a60015481565b346100025761011c600054600160a060020a031681565b346100025761010860043560005433600160a060020a03908116911614156101055760018190555b50565b005b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f3",
     "events": {},
-    "updated_at": 1480227034693,
-    "address": "0x9547de991300480a50242ccc742f437e346250f5",
+    "updated_at": 1480231984180,
+    "address": "0x2e0fbf7b4ea497ce163ac5417545873b559f7c70",
     "links": {}
   }
 };
@@ -7603,7 +7603,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480227034702,
+    "updated_at": 1480231984189,
     "links": {},
     "address": "0x099102cd23637b807fd35b01ce4f7b24138641ae"
   }
@@ -45117,13 +45117,13 @@ function returnOrderDetails(address){
 
 function buyOrderBuilder(z, a, b, c){
 	var stime = document.getElementById("stime");
-  	//stime.innerHTML = a;
+  	stime.innerHTML = a;
 
   	var wh = document.getElementById("wh");
   	wh.innerHTML = b;
 
   	var d = document.getElementById("d");
-  	//d.innerHTML = c;
+  	d.innerHTML = c;
 
   	document.getElementById("wattHours").value = b;
   	//document.getElementById("duration").value = c;
