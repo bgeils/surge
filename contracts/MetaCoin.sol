@@ -41,8 +41,8 @@ contract MetaCoin {
       return sellOrders.length;
   }
   
-  function createSellOrder(uint stime, uint wh, uint d){
-      address newContract = new SellOrder(stime, wh, d);
+  function createSellOrder(uint stime, uint wh, uint d, uint p){
+      address newContract = new SellOrder(stime, wh, d, p);
       sellOrders.push(newContract);
   }
 }
@@ -59,17 +59,19 @@ contract SellOrder {
   uint public startTime; // start time of the distribution of energy
   uint public wattHours; // amount of power being sold in watt hours
   uint public duration; // amount of time the power will be distributed for
+  uint public price; //cost 
   
    // A dynamically-sized array of `BuyOrder` structs that are verified
   BuyOrder[] public buyOrders;
   
   event Creation(address indexed _from, address indexed _to, uint256 _value);
   
-  function SellOrder(uint stime, uint wh, uint d){
+  function SellOrder(uint stime, uint wh, uint d, uint p){
       seller = msg.sender;
       startTime = stime;
       wattHours = wh;
       duration = d;
+      price = p;
   }
   
   function addBuyer(uint wh, uint d){
@@ -87,6 +89,10 @@ contract SellOrder {
   
   function getSeller() returns(address){
       return seller;
+  }
+  
+  function getPrice() returns(uint){
+      return price;
   }
 
   function getStartTime() returns(uint){

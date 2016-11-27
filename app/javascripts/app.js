@@ -93,7 +93,7 @@ window.onload = function() {
     
     account = getJsonFromUrl()['uname'];
 
-    createSellOrder(Date.parse(params['stime']), params['wh'], params['d']);
+    createSellOrder(Date.parse(params['stime']), params['wh'], params['d'], params['p']);
     htmlSellOrder();
   } else if(window.location.href.match('orders.html') != null){
 
@@ -112,7 +112,8 @@ function gotoSellOrder(){
   var startTime = document.getElementById("startTime").value;
   var wattHours = document.getElementById("wattHours").value;
   var duration = document.getElementById("duration").value;
-  post('/sell-order.html', {stime: startTime, wh: wattHours, d: duration, uname: account}, "get");
+  var price = document.getElementById("price").value;
+  post('/sell-order.html', {stime: startTime, wh: wattHours, d: duration, p: price, uname: account}, "get");
 }
 
 function viewSellOrders(){

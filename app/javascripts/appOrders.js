@@ -38,11 +38,20 @@ function inter(sell, address, build){
   var stime = null;
   var wh = null;
   var d = null;
+  var p = null;
 
   sell.getSeller.call({from: account}).then(function(value) {
 
     console.log("Seller addr: "+ value);
 
+  }).catch(function(e) {
+    console.log(e);
+  });
+
+  sell.getPrice.call({from: account}).then(function(value) {
+
+    console.log("price: "+ value);
+    p = value;
   }).catch(function(e) {
     console.log(e);
   });
@@ -69,15 +78,15 @@ function inter(sell, address, build){
     console.log(e);
   }).then(function(){
   	if(build){
-	  	tableBuilder(address, stime, wh, d);
+	  	tableBuilder(address, stime, wh, d, p);
 	}else{
-		buyOrderBuilder(address, stime, wh, d)
+		buyOrderBuilder(address, stime, wh, d, p)
 	}
   });
 }
 
 
-function tableBuilder(z, a, b, c){
+function tableBuilder(z, a, b, c, d){
  if(b == 0){ return;}
 	var table = document.getElementById("order-table");
   	var row = table.insertRow(0);
@@ -90,6 +99,8 @@ function tableBuilder(z, a, b, c){
   	cell2.innerHTML = Math.round(b);
   	var cell3 = row.insertCell(3);
   	cell3.innerHTML = c;
+    var cell4 = row.insertCell(4);
+    cell4.innerHTML = d/100;
 }
 
 function buyOrder(d){

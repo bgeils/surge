@@ -1,7 +1,7 @@
-function createSellOrder(stime, wh, d){
+function createSellOrder(stime, wh, d, p){
    var meta = MetaCoin.deployed();
    // var addr = "null";
-   meta.createSellOrder( stime, wh, d , {from: account, gas: 1550000}).then(function(instance) {
+   meta.createSellOrder( stime, wh, d , p*100, {from: account, gas: 1550000}).then(function(instance) {
   		console.log(wh)
   		console.log(d)
   		console.log(instance)
@@ -17,6 +17,7 @@ function htmlSellOrder(){
 	var stime = document.getElementById("stime");
 	var wh = document.getElementById("wh");
 	var d = document.getElementById("d");
+	var p = document.getElementById("p");
 
 	// console.log(stime)
 	// var cstime = stime.valueAsNumber;
@@ -26,6 +27,7 @@ function htmlSellOrder(){
 	stime.innerHTML = params['stime'];
 	wh.innerHTML = params['wh'];
 	d.innerHTML = params['d'];
+	p.innerHTML = params['p'];
 }
 
 function backHome(){

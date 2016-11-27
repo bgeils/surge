@@ -14,7 +14,7 @@ function returnOrderDetails(address){
   inter(sell, address, false);
 }
 
-function buyOrderBuilder(z, a, b, c){
+function buyOrderBuilder(z, a, b, c, k){
 	var stime = document.getElementById("stime");
   	stime.innerHTML = a;
 
@@ -23,6 +23,9 @@ function buyOrderBuilder(z, a, b, c){
 
   	var d = document.getElementById("d");
   	d.innerHTML = c;
+
+  	var p = document.getElementById("p");
+  	p.innerHTML = k;
 
   	document.getElementById("wattHours").value = b;
   	//document.getElementById("duration").value = c;
