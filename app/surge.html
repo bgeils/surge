@@ -12,23 +12,20 @@
   <h3>You have <span class="black"><span id="balance"></span> Charge</span></h3>
   <h3>Your Address <span class="black"><span id="address">not a user</span></span></h3>
   <span id="status"></span>
-  <br>
-  <button id="createSellOrder" onclick="gotoSellOrder()">Sell Orders</button>
   <br><br>
 
 
   <!-- SEND -->
-  <h1><a href="#" onclick="toggle_visibility('send-div');">Send Charge</a></h1>
+  <h2><a href="#" onclick="toggle_visibility('send-div');">Send Charge</a></h2>
   <div id="send-div">
     <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
     <br><label for="receiver">To Address:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
     <br><br><button id="send" onclick="sendCoin()">Send MetaCoin</button>
     <br><br>
-    <br>
   </div>
 
   <!-- SELL ORDER -->
-  <h1><a href="#" onclick="toggle_visibility('sell-order-div');">Create Sell Order</a></h1>
+  <h2><a href="#" onclick="toggle_visibility('sell-order-div');">Create Sell Order</a></h2>
   <div id="sell-order-div">
     <br><label for="start_time">Start Time:</label><input type="datetime-local" id="startTime" step="5"></input>
     <br><label for="watt_hours">Watt Hours:</label><input type="number" id="wattHours" value="2000"></input>
@@ -36,6 +33,8 @@
     <br><br><button id="createSellOrder" onclick="gotoSellOrder()">Create Sell Order</button>
     <br><br>
   </div>
+
+  <h2><a href="#" onclick="viewSellOrders()">View Orders</a></h2>
   
 </body>
 </html>

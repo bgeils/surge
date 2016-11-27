@@ -134,5 +134,7 @@ function gotoSellOrder(){
   post('/sell-order.html', {stime: startTime, wh: wattHours, d: duration, uname: account}, "get");
 }
 
-
+function viewSellOrders(){
+  post('/orders.html', {uname: account}, "get");
+}
 

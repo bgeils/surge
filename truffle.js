@@ -3,6 +3,7 @@ module.exports = {
     "index.html": "index.html",
     "surge.html": "surge.html",
     "sell-order.html": "sell-order.html",
+    "orders.html": "orders.html",
     "app.js": [
       "javascripts/app.js",
       "javascripts/appIndex.js",
