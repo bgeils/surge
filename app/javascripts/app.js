@@ -99,7 +99,12 @@ window.onload = function() {
     account = getJsonFromUrl()['uname'];
 
     getAllOrders();
-  }
+  } else if(window.location.href.match('buy-order.html') != null){
+
+    account = getJsonFromUrl()['uname'];
+
+    attemptBuy();
+  } 
 }
 
 function gotoSellOrder(){

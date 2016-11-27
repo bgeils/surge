@@ -25,10 +25,16 @@ function getAllOrders(){
 	  
 	}
 
-function getSellOrderDetails(address){
+
+function getSellOrderDetails( address){
 
   var sell = SellOrder.at(address);
   
+  inter(sell, address, true);
+  
+};
+
+function inter(sell, address, build){
   var stime = null;
   var wh = null;
   var d = null;
@@ -62,10 +68,13 @@ function getSellOrderDetails(address){
   }).catch(function(e) {
     console.log(e);
   }).then(function(){
-  	tableBuilder(address, stime, wh, d)
+  	if(build){
+	  	tableBuilder(address, stime, wh, d);
+	}else{
+		buyOrderBuilder(address, stime, wh, d)
+	}
   });
-  
-};
+}
 
 function tableBuilder(z, a, b, c){
 	var table = document.getElementById("order-table");
@@ -76,7 +85,7 @@ function tableBuilder(z, a, b, c){
   	var cell1 = row.insertCell(1);
   	cell1.innerHTML = a;
   	var cell2 = row.insertCell(2);
-  	cell2.innerHTML = b;
+  	cell2.innerHTML = Math.round(b);
   	var cell3 = row.insertCell(3);
   	cell3.innerHTML = c;
 }

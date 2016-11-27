@@ -72,10 +72,17 @@ contract SellOrder {
       duration = d;
   }
   
-  function setOrder(uint startTime, uint wattHours, uint duration){
-    startTime = startTime;
-    wattHours = wattHours;
-    duration = duration;
+  function addBuyer(uint wh, uint d){
+      if(wattHours < wh){ throw;}
+      if(duration < d){throw;}
+      wattHours = wattHours - wh;
+      buyOrders.push(BuyOrder({
+                buyer: msg.sender,
+                buyWattHours: wh,
+                buyStartTime: 0,
+                duration: d
+            }));
+      
   }
   
   function getSeller() returns(address){
