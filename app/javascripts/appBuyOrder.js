@@ -16,16 +16,16 @@ function returnOrderDetails(address){
 
 function buyOrderBuilder(z, a, b, c){
 	var stime = document.getElementById("stime");
-  	stime.innerHTML = a;
+  	//stime.innerHTML = a;
 
   	var wh = document.getElementById("wh");
   	wh.innerHTML = b;
 
   	var d = document.getElementById("d");
-  	d.innerHTML = c;
+  	//d.innerHTML = c;
 
   	document.getElementById("wattHours").value = b;
-  	document.getElementById("duration").value = c;
+  	//document.getElementById("duration").value = c;
 
 }
 

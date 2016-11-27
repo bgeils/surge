@@ -76,12 +76,14 @@ function inter(sell, address, build){
   });
 }
 
+
 function tableBuilder(z, a, b, c){
+ if(b == 0){ return;}
 	var table = document.getElementById("order-table");
   	var row = table.insertRow(0);
   	var cell0 = row.insertCell(0);
   	console.log(z)
-  	cell0.innerHTML = '<button data-internalid="'+z+'" onclick="buyOrder(this);">Buy </button>'
+  	cell0.innerHTML = '<button id="small" data-internalid="'+z+'" onclick="buyOrder(this);">Buy </button>'
   	var cell1 = row.insertCell(1);
   	cell1.innerHTML = a;
   	var cell2 = row.insertCell(2);

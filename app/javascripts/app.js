@@ -35,6 +35,7 @@ function sendCoin() {
   meta.sendCoin(receiver, amount, {from: account}).then(function() {
     setStatus("Transaction complete!");
     refreshBalance();
+    return null;
   }).catch(function(e) {
     console.log(e);
     setStatus("Error sending coin; see log.");
@@ -92,7 +93,7 @@ window.onload = function() {
     
     account = getJsonFromUrl()['uname'];
 
-    createSellOrder(params['wh'], params['d']);
+    createSellOrder(Date.parse(params['stime']), params['wh'], params['d']);
     htmlSellOrder();
   } else if(window.location.href.match('orders.html') != null){
 

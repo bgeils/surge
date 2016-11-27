@@ -99,14 +99,19 @@ td, th {
     text-align: left;
     padding: 8px;
     text-align: center;
-    font-size: 18pt;
+    font-size: 12pt;
     font-weight: 200;
 }
 
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
 .header{
   font-weight: 200 !important;
   font-size: 18pt;
+}
+
+#small{
+  padding: 5px 10px;
 }

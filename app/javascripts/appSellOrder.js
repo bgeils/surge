@@ -1,7 +1,7 @@
-function createSellOrder(wh, d){
+function createSellOrder(stime, wh, d){
    var meta = MetaCoin.deployed();
    // var addr = "null";
-   meta.createSellOrder( 1, wh, d , {from: account, gas: 1550000}).then(function(instance) {
+   meta.createSellOrder( stime, wh, d , {from: account, gas: 1550000}).then(function(instance) {
   		console.log(wh)
   		console.log(d)
   		console.log(instance)

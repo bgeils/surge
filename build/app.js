@@ -5698,9 +5698,9 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052603d8060106000396000f36504044633f3de50606060405260e060020a600035046396e4ee3d81146024575b6007565b6024356004350260408051918252519081900360200190f3",
     "events": {},
-    "updated_at": 1480222951210,
+    "updated_at": 1480227034690,
     "links": {},
-    "address": "0x4cf6ec53276e2e49ed9012d1d9d9a4a971ff04e4"
+    "address": "0x1ddd671081046bcfd9cdc69e72cc2c0ffe03262a"
   }
 };
 
@@ -6360,11 +6360,11 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480222951214,
+    "updated_at": 1480227034697,
     "links": {
-      "ConvertLib": "0x4cf6ec53276e2e49ed9012d1d9d9a4a971ff04e4"
+      "ConvertLib": "0x1ddd671081046bcfd9cdc69e72cc2c0ffe03262a"
     },
-    "address": "0x12dca5a40e4cb4da74c6cb8c92b627dd9af09a8d"
+    "address": "0x0bc356f8bdd04a5cc8d28ccf1bfe9a83cf5b1ad9"
   }
 };
 
@@ -6904,8 +6904,8 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a0319909116179055610138806100376000396000f3606060405260e060020a60003504630900f010811461003f578063445df0ac146100b85780638da5cb5b146100c6578063fdacd576146100dd575b610002565b34610002576101086004356000805433600160a060020a03908116911614156100b45781905080600160a060020a031663fdacd5766001600050546040518260e060020a02815260040180828152602001915050600060405180830381600087803b156100025760325a03f115610002575050505b5050565b346100025761010a60015481565b346100025761011c600054600160a060020a031681565b346100025761010860043560005433600160a060020a03908116911614156101055760018190555b50565b005b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f3",
     "events": {},
-    "updated_at": 1480222951216,
-    "address": "0xc2d209d7802058e720acf3835d3de18fbc2e3e9f",
+    "updated_at": 1480227034693,
+    "address": "0x9547de991300480a50242ccc742f437e346250f5",
     "links": {}
   }
 };
@@ -7603,7 +7603,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480222951220,
+    "updated_at": 1480227034702,
     "links": {},
     "address": "0x099102cd23637b807fd35b01ce4f7b24138641ae"
   }
@@ -44737,8 +44737,8 @@ module.exports = transfer;
 },{"crypto":58}],224:[function(require,module,exports){
 module.exports = {
   "ConvertLib": require("/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js"),
-  "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
   "MetaCoin": require("/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js"),
+  "Migrations": require("/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js"),
   "SellOrder": require("/Users/bgeils/workspace/truffle/build/contracts/SellOrder.sol.js"),
 };
 },{"/Users/bgeils/workspace/truffle/build/contracts/ConvertLib.sol.js":1,"/Users/bgeils/workspace/truffle/build/contracts/MetaCoin.sol.js":2,"/Users/bgeils/workspace/truffle/build/contracts/Migrations.sol.js":3,"/Users/bgeils/workspace/truffle/build/contracts/SellOrder.sol.js":4}]},{},[224])(224)
@@ -44774,7 +44774,7 @@ window.addEventListener('load', function() {
 
                                                                 
 
-  [MetaCoin,ConvertLib,SellOrder,Migrations].forEach(function(contract) {         
+  [ConvertLib,MetaCoin,Migrations,SellOrder].forEach(function(contract) {         
 
     contract.setProvider(window.web3.currentProvider);          
 
@@ -44823,6 +44823,7 @@ function sendCoin() {
   meta.sendCoin(receiver, amount, {from: account}).then(function() {
     setStatus("Transaction complete!");
     refreshBalance();
+    return null;
   }).catch(function(e) {
     console.log(e);
     setStatus("Error sending coin; see log.");
@@ -44880,7 +44881,7 @@ window.onload = function() {
     
     account = getJsonFromUrl()['uname'];
 
-    createSellOrder(params['wh'], params['d']);
+    createSellOrder(Date.parse(params['stime']), params['wh'], params['d']);
     htmlSellOrder();
   } else if(window.location.href.match('orders.html') != null){
 
@@ -44951,10 +44952,10 @@ function post(path, params, method) {
 
 
 
-function createSellOrder(wh, d){
+function createSellOrder(stime, wh, d){
    var meta = MetaCoin.deployed();
    // var addr = "null";
-   meta.createSellOrder( 1, wh, d , {from: account, gas: 1550000}).then(function(instance) {
+   meta.createSellOrder( stime, wh, d , {from: account, gas: 1550000}).then(function(instance) {
   		console.log(wh)
   		console.log(d)
   		console.log(instance)
@@ -45075,12 +45076,14 @@ function inter(sell, address, build){
   });
 }
 
+
 function tableBuilder(z, a, b, c){
+ if(b == 0){ return;}
 	var table = document.getElementById("order-table");
   	var row = table.insertRow(0);
   	var cell0 = row.insertCell(0);
   	console.log(z)
-  	cell0.innerHTML = '<button data-internalid="'+z+'" onclick="buyOrder(this);">Buy </button>'
+  	cell0.innerHTML = '<button id="small" data-internalid="'+z+'" onclick="buyOrder(this);">Buy </button>'
   	var cell1 = row.insertCell(1);
   	cell1.innerHTML = a;
   	var cell2 = row.insertCell(2);
@@ -45114,16 +45117,16 @@ function returnOrderDetails(address){
 
 function buyOrderBuilder(z, a, b, c){
 	var stime = document.getElementById("stime");
-  	stime.innerHTML = a;
+  	//stime.innerHTML = a;
 
   	var wh = document.getElementById("wh");
   	wh.innerHTML = b;
 
   	var d = document.getElementById("d");
-  	d.innerHTML = c;
+  	//d.innerHTML = c;
 
   	document.getElementById("wattHours").value = b;
-  	document.getElementById("duration").value = c;
+  	//document.getElementById("duration").value = c;
 
 }
 
