@@ -25,7 +25,7 @@ function buyOrderBuilder(z, a, b, c, k){
   	d.innerHTML = c;
 
   	var p = document.getElementById("p");
-  	p.innerHTML = k;
+  	p.innerHTML = k/100;
 
   	document.getElementById("wattHours").value = b;
   	//document.getElementById("duration").value = c;
