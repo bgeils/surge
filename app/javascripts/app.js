@@ -120,10 +120,15 @@ window.onload = function() {
   } else if(window.location.href.match('sell-order.html') != null){
     var params = getJsonFromUrl();
     
-    account = getJsonFromUrl()['uname']
+    account = getJsonFromUrl()['uname'];
 
     createSellOrder(params['wh'], params['d']);
     htmlSellOrder();
+  } else if(window.location.href.match('orders.html') != null){
+
+    account = getJsonFromUrl()['uname'];
+
+    getAllOrders();
   }
 }
 

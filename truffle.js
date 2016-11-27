@@ -8,7 +8,8 @@ module.exports = {
       "javascripts/app.js",
       "javascripts/appIndex.js",
       "javascripts/appSellOrder.js",
-      "javascripts/utilityFunctions.js"
+      "javascripts/utilityFunctions.js",
+      "javascripts/appOrders.js"
     ],
     "app.css": [
       "stylesheets/app.css"
