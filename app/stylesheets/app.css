@@ -96,6 +96,9 @@ td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    text-align: center;
+    font-size: 18pt;
+    font-weight: 200;
 }
 
 tr:nth-child(even) {
@@ -103,5 +106,5 @@ tr:nth-child(even) {
 }
 .header{
   font-weight: 200 !important;
-  font-size: 16pt;
+  font-size: 18pt;
 }

@@ -44778,7 +44778,7 @@ window.addEventListener('load', function() {
 
                                                                 
 
-  [MetaCoin,ConvertLib,Migrations,SellOrder].forEach(function(contract) {         
+  [ConvertLib,MetaCoin,Migrations,SellOrder].forEach(function(contract) {         
 
     contract.setProvider(window.web3.currentProvider);          
 
@@ -45060,18 +45060,29 @@ function getSellOrderDetails(address){
   }).catch(function(e) {
     console.log(e);
   }).then(function(){
-  	tableBuilder(stime, wh, d)
+  	tableBuilder(address, stime, wh, d)
   });
   
 };
 
-function tableBuilder(a, b, c){
+function tableBuilder(z, a, b, c){
 	var table = document.getElementById("order-table");
   	var row = table.insertRow(0);
-  	var cell1 = row.insertCell(0);
+  	var cell0 = row.insertCell(0);
+  	console.log(z)
+  	cell0.innerHTML = '<button data-internalid="'+z+'" onclick="buyOrder(this);">Buy </button>'
+  	var cell1 = row.insertCell(1);
   	cell1.innerHTML = a;
-  	var cell2 = row.insertCell(1);
+  	var cell2 = row.insertCell(2);
   	cell2.innerHTML = b;
-  	var cell3 = row.insertCell(2);
+  	var cell3 = row.insertCell(3);
   	cell3.innerHTML = c;
 }
+
+function buyOrder(d){
+	var val = d.getAttribute("data-internalid");
+	console.log(val);
+	post('/buy-order.html', {orderid: val, uname: account}, "get");
+
+}
+
