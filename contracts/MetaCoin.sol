@@ -41,8 +41,8 @@ contract MetaCoin {
       return sellOrders.length;
   }
   
-  function createSellOrder(){
-      address newContract = new SellOrder();
+  function createSellOrder(uint stime, uint wh, uint d){
+      address newContract = new SellOrder(stime, wh, d);
       sellOrders.push(newContract);
   }
 }
@@ -63,8 +63,13 @@ contract SellOrder {
    // A dynamically-sized array of `BuyOrder` structs that are verified
   BuyOrder[] public buyOrders;
   
-  function SellOrder(){
+  event Creation(address indexed _from, address indexed _to, uint256 _value);
+  
+  function SellOrder(uint stime, uint wh, uint d){
       seller = msg.sender;
+      startTime = stime;
+      wattHours = wh;
+      duration = d;
   }
   
   function setOrder(uint startTime, uint wattHours, uint duration){

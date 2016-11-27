@@ -1,30 +1,14 @@
 function createSellOrder(wh, d){
    var meta = MetaCoin.deployed();
    // var addr = "null";
-   meta.createSellOrder({from: account, gas: 1550000}).then(function(instance) {
-    // `instance` is a new instance of the abstraction.
-    // If this callback is called, the deployment was successful.
-    //console.log("New Sell Order created:" + instance);
-    // addr = instance.address
-    // console.log(addr)
-
+   meta.createSellOrder( 1, wh, d , {from: account, gas: 1550000}).then(function(instance) {
+  		console.log(wh)
+  		console.log(d)
+  		console.log(instance)
   }).catch(function(e) {
   	console.log(e);
     // There was an error! Handle it.
   });
-
-	
-  
-
-  //  SellOrder.new({from: account, gas: 1550000}).then(function(instance) {
-  //   // `instance` is a new instance of the abstraction.
-  //   // If this callback is called, the deployment was successful.
-  //   console.log("New Sell Order Addr:"+ instance.address);
-  //   //getSellOrderDetails(instance.address);
-  //   return null;
-  // }).catch(function(e) {
-  //   // There was an error! Handle it.
-  // });
 }
 
 function htmlSellOrder(){

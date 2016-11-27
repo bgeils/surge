@@ -24,36 +24,6 @@ function refreshBalance() {
   });
 };
 
-function getSellOrderDetails(address){
-
-  var sell = SellOrder.at(address);
-
-  sell.getSeller.call({from: account}).then(function(value) {
-    console.log("Seller addr: "+ value);
-  }).catch(function(e) {
-    console.log(e);
-  });
-
-  sell.getStartTime.call({from: account}).then(function(value) {
-    console.log("Start Time: "+ value)
-  }).catch(function(e) {
-    console.log(e);
-  });
-
-  sell.getWattHours.call({from: account}).then(function(value) {
-    console.log("Watt Hours: "+ value)
-  }).catch(function(e) {
-    console.log(e);
-  });
-
-  sell.getDuration.call({from: account}).then(function(value) {
-    console.log("Duration: "+ value)
-  }).catch(function(e) {
-    console.log(e);
-  });
-
-};
-
 function sendCoin() {
   var meta = MetaCoin.deployed();
 
