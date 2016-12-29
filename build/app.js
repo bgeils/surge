@@ -5698,9 +5698,9 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052603d8060106000396000f36504044633f3de50606060405260e060020a600035046396e4ee3d81146024575b6007565b6024356004350260408051918252519081900360200190f3",
     "events": {},
-    "updated_at": 1480234321603,
+    "updated_at": 1480280490687,
     "links": {},
-    "address": "0x7cf028e97654b1e9c71f40a30de9d2f02a16bbae"
+    "address": "0x51f7fb20e2bd1a2bef25f2b8164ebc2dd09450df"
   }
 };
 
@@ -6364,11 +6364,11 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480234321608,
+    "updated_at": 1480280490691,
     "links": {
-      "ConvertLib": "0x7cf028e97654b1e9c71f40a30de9d2f02a16bbae"
+      "ConvertLib": "0x51f7fb20e2bd1a2bef25f2b8164ebc2dd09450df"
     },
-    "address": "0xf251981bdd088a35d3536202c8c80004e62b4e2f"
+    "address": "0x55a63162ede55b47e7bf0605a92fc6f6f9a619ca"
   }
 };
 
@@ -6908,8 +6908,8 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     ],
     "unlinked_binary": "0x6060604052600080546c0100000000000000000000000033810204600160a060020a0319909116179055610138806100376000396000f3606060405260e060020a60003504630900f010811461003f578063445df0ac146100b85780638da5cb5b146100c6578063fdacd576146100dd575b610002565b34610002576101086004356000805433600160a060020a03908116911614156100b45781905080600160a060020a031663fdacd5766001600050546040518260e060020a02815260040180828152602001915050600060405180830381600087803b156100025760325a03f115610002575050505b5050565b346100025761010a60015481565b346100025761011c600054600160a060020a031681565b346100025761010860043560005433600160a060020a03908116911614156101055760018190555b50565b005b60408051918252519081900360200190f35b60408051600160a060020a039092168252519081900360200190f3",
     "events": {},
-    "updated_at": 1480234321613,
-    "address": "0xeec52964894b48ff59af5375a58fd8e2d5847971",
+    "updated_at": 1480280490693,
+    "address": "0xbad6eb22bb12bd2087a0a48a7abedc09b1fd4be8",
     "links": {}
   }
 };
@@ -7637,7 +7637,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "type": "event"
       }
     },
-    "updated_at": 1480234321611,
+    "updated_at": 1480280490696,
     "links": {},
     "address": "0x099102cd23637b807fd35b01ce4f7b24138641ae"
   }
@@ -44808,7 +44808,7 @@ window.addEventListener('load', function() {
 
                                                                 
 
-  [MetaCoin,ConvertLib,Migrations,SellOrder].forEach(function(contract) {         
+  [ConvertLib,MetaCoin,Migrations,SellOrder].forEach(function(contract) {         
 
     contract.setProvider(window.web3.currentProvider);          
 
