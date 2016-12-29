@@ -1,15 +1,18 @@
 # Surge
-Ultrahack project. Blockchain implementation of peer to peer energy marketplace
+Blockchain implementation of peer to peer energy marketplace
 
-## Requirements
+## Requirements/Setup
 
-sudo npm install -g ethereumjs-testrpc
-sudo npm install -g truffle
+`sudo npm install -g ethereumjs-testrpc`
+`sudo npm install -g truffle`
 
 git clone https://github.com/bgeils/surge.git
 
 ## To run
+In one bash shell:
+$ 
 
+In another bash shell:
 $ cd ~/surge
 $ truffle build
 $ truffle serve
