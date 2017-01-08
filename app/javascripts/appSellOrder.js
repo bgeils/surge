@@ -1,15 +1,39 @@
+function check(stime, wh, d, p){
+  var meta = MetaCoin.deployed();
+  // var addr = "null";
+  meta.check.call(d, {from: account}).then(function(value) {
+    value = value.toNumber();
+    console.log("HERE")
+     console.log(value)
+    if (value == 0){
+      console.log("can deploy")
+      createSellOrder(stime, wh, d, p)
+    }
+    else {
+      console.log("alert users")
+    }
+ }).catch(function(e) {
+   console.log(e);
+   // There was an error! Handle it.
+ });
+}
+
 function createSellOrder(stime, wh, d, p){
    var meta = MetaCoin.deployed();
    // var addr = "null";
-   meta.createSellOrder( stime, wh, d , p*100, {from: account, gas: 1550000}).then(function(instance) {
+   meta.createSellOrder( stime, wh, d , p*100, {from: account, gas: 1550000}
+).then(function(code, instance) {
+     console.log("HERE")
   		console.log(wh)
   		console.log(d)
   		console.log(instance)
+      console.log(code)
   }).catch(function(e) {
   	console.log(e);
     // There was an error! Handle it.
   });
 }
+
 
 function htmlSellOrder(){
 	var params =getJsonFromUrl();
