@@ -93,7 +93,16 @@ window.onload = function() {
 
     account = getJsonFromUrl()['uname'];
 
-    check(Date.parse(params['stime']), params['wh'], params['d'], params['p']);
+    check(Date.parse(params['stime']), params['wh'], params['d'], params['p'], function (value){
+      if (value == null){
+        htmlSellOrder();
+      }
+      else{
+        htmlSellOrder2();
+
+      }
+
+    });
     // createSellOrder(Date.parse(params['stime']), params['wh'], params['d'], params['p']);
 
     // htmlSellOrder();

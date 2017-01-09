@@ -41,8 +41,8 @@ contract MetaCoin {
       return sellOrders.length;
   }
 
-  function check(uint d) external returns (uint8 results){
-    if (d>1){
+  function check(uint d, uint l) external returns (uint8 results){
+    if (d != l){
     return FAIL;
     }
     else {
@@ -87,31 +87,40 @@ contract SellOrder {
         uint duration; // duration of requested energy
     }
 
+
   address public seller; // address of the person selling the energy
   uint public startTime; // start time of the distribution of energy
   uint public wattHours; // amount of power being sold in watt hours
   uint public duration; // amount of time the power will be distributed for
   uint public price; //cost
+  uint public sellstatus; //status
 
-   // A dynamically-sized array of `BuyOrder` structs that are verified
+
+  // A dynamically-sized array of `BuyOrder` structs that are verified
   BuyOrder[] public buyOrders;
 
   event Creation(address indexed _from, address indexed _to, uint256 _value);
 
   function SellOrder(uint stime, uint wh, uint d, uint p){
-
       seller = msg.sender;
       startTime = stime;
       wattHours = wh;
       duration = d;
       price = p;
+      sellstatus = 0;
 
   }
 
-  function addBuyer(uint wh, uint d){
-      if(wattHours < wh){ throw;}
-      if(duration < d){throw;}
+  function addBuyer(uint wh, uint d) external returns (uint8 results){
+      if(wattHours  < wh){
+        return NO_AMOUNT;
+        }
+      else if(duration < d){throw;}
+      else{
       wattHours = wattHours - wh;
+      if (wattHours < 1){
+        sellstatus = 1;
+      }
       buyOrders.push(BuyOrder({
                 buyer: msg.sender,
                 buyWattHours: wh,
@@ -119,6 +128,12 @@ contract SellOrder {
                 duration: d
             }));
 
+            }
+
+  }
+
+  function getStatus() returns(uint){
+      return sellstatus;
   }
 
   function getSeller() returns(address){
