@@ -20,6 +20,8 @@ $ testrpc
 In another bash shell:
 ```
 $ cd ~/surge
+$ truffle compile
+$ truffle migrate
 $ truffle build
 $ truffle serve
 ```

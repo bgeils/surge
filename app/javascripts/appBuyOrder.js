@@ -10,7 +10,7 @@ function attemptBuy(){
 
 function returnOrderDetails(address){
 	var sell = SellOrder.at(address);
-  
+
   inter(sell, address, false);
 }
 
@@ -41,9 +41,25 @@ function submitPurchase(){
 	var sell = SellOrder.at(orderid);
 	var amount = parseInt(document.getElementById("wattHours").value);
 	sell.addBuyer(amount, 1, {from: account, gas: 1550000}).then(function(value) {
-	    
 	    console.log(value)
+			htmlBuyOrder()
 	}).catch(function(e) {
 		console.log(e);
 	});
+
+}
+
+function htmlBuyOrder(){
+	var params =getJsonFromUrl();
+
+  var status = document.getElementById("buystatus");
+	document.getElementById("wattHours").html()
+	// console.log(stime)
+	// var cstime = stime.valueAsNumber;
+	// console.log(cstime)
+	// console.log(new Date(stime.valueAsNumber))
+
+
+  status.innerHTML = 'Buy Order Complete';
+
 }

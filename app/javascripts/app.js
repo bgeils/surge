@@ -59,12 +59,12 @@ window.onload = function() {
       accounts = accs;
       //account = accounts[0];
       account = getJsonFromUrl()['uname']
-      
+
       console.log(accounts);
       console.log("account:"+ account)
 
       refreshBalance();
-      
+
     });
   } else if(window.location.href.match('index.html') != null){
 
@@ -80,7 +80,7 @@ window.onload = function() {
       }
 
       accounts = accs;
-      
+
       var ex1 = document.getElementById("ex1");
       var ex2 = document.getElementById("ex2");
       ex1.innerHTML = accounts[0];
@@ -90,22 +90,37 @@ window.onload = function() {
 
   } else if(window.location.href.match('sell-order.html') != null){
     var params = getJsonFromUrl();
-    
+
     account = getJsonFromUrl()['uname'];
 
-    createSellOrder(Date.parse(params['stime']), params['wh'], params['d'], params['p']);
-    htmlSellOrder();
+    check(Date.parse(params['stime']), params['wh'], params['d'], params['p'], function (value){
+      if (value == null){
+        htmlSellOrder();
+      }
+      else{
+        htmlSellOrder2();
+
+      }
+
+    });
+    // createSellOrder(Date.parse(params['stime']), params['wh'], params['d'], params['p']);
+
+    // htmlSellOrder();
+
   } else if(window.location.href.match('orders.html') != null){
 
     account = getJsonFromUrl()['uname'];
 
     getAllOrders();
+
+    console.log("orders here")
+
   } else if(window.location.href.match('buy-order.html') != null){
 
     account = getJsonFromUrl()['uname'];
 
     attemptBuy();
-  } 
+  }
 }
 
 function gotoSellOrder(){
@@ -119,4 +134,3 @@ function gotoSellOrder(){
 function viewSellOrders(){
   post('/orders.html', {uname: account}, "get");
 }
-

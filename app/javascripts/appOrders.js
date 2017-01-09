@@ -1,14 +1,15 @@
 var tab = [];
 
 function getAllOrders(){
+
 	var meta = MetaCoin.deployed();
 	var text = "";
 
-	meta.countSellOrder.call({from: account}).then(function(value) {
+	meta.countSellOrder.call({from: accounts}).then(function(value) {
 	  orderLen = value.valueOf();
+		console.log("sell order here" + value + value.valueOf());
 	  for (i = 0; i < orderLen; i++) {
 		  	meta.getSellOrder.call(i, {from: account}).then(function(value) {
-
 			  	getSellOrderDetails(value);
 			  	return null;
 			  }).catch(function(e) {
@@ -22,23 +23,36 @@ function getAllOrders(){
 	    console.log(e);
 	    setStatus("Error getting sell orders; see log.");
 	  });
-	  
+
 	}
 
 
 function getSellOrderDetails( address){
 
   var sell = SellOrder.at(address);
-  
+
   inter(sell, address, true);
-  
+
 };
 
 function inter(sell, address, build){
+	var status = null;
   var stime = null;
   var wh = null;
   var d = null;
   var p = null;
+
+
+	sell.getStatus.call({from: account}).then(function(value) {
+
+		console.log("Status: "+ value.toNumber());
+		if (value != '0'){
+			return;
+		}
+
+	}).catch(function(e) {
+		console.log(e);
+	});
 
   sell.getSeller.call({from: account}).then(function(value) {
 
@@ -47,6 +61,8 @@ function inter(sell, address, build){
   }).catch(function(e) {
     console.log(e);
   });
+
+
 
   sell.getPrice.call({from: account}).then(function(value) {
 
